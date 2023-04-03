@@ -43,7 +43,7 @@ client, err := metronome.NewClient("https://api.metronome.com/v1", metronome.Wit
 Following is a complete example you can try in your project. Replace the `REPLACE_ME` with your
 own token generated from Metronome account.
 
-https://github.com/adilansari/metronome-go-client/blob/9d428f2867112c0ba913133bfcea9db6a5cb331d/examples/create_customer.go
+https://github.com/adilansari/metronome-go-client/blob/b78ab12ab45af7cde7c29d300c127c7f94b8500c/examples/create_customer.go
 
 ## Requesting updates
 - Since this is not official client, the API may be out of date
