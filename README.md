@@ -96,6 +96,9 @@ func main() {
 
 ```
 
+https://github.com/adilansari/metronome-go-client/blob/main/examples/create_customer.go
+
+
 ## Requesting updates
 - Since this is not official client, the API may be out of date
 - Please open an issue in the repo and I'll try to update the client to latest
