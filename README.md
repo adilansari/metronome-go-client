@@ -72,7 +72,10 @@ func main() {
 
 	// Client will be used to perform all operations on metronome.
 	// Auth provider generated above will implicitly add an authorization token to all requests.
-	client, err := metronome.NewClient("https://api.metronome.com/v1", metronome.WithRequestEditorFn(authProvider.Intercept))
+	client, err := metronome.NewClientWithResponses(
+		"https://api.metronome.com/v1",
+		metronome.WithRequestEditorFn(authProvider.Intercept),
+	)
 	if err != nil {
 		panic(err)
 	}
@@ -84,26 +87,28 @@ func main() {
 	}
 
 	// HTTP POST call to "/customers" endpoint
-	resp, err := client.CreateCustomer(context.TODO(), createCustomerBody)
+	resp, err := client.CreateCustomerWithResponse(context.TODO(), createCustomerBody)
 	if err != nil {
 		panic(err)
 	}
 
 	// Checking if request succeeded
-	if resp.StatusCode != http.StatusOK {
-		panic(fmt.Errorf("metronome request failed: %s", resp.Status))
+	if resp.StatusCode() != http.StatusOK {
+		panic(fmt.Errorf("metronome request failed: %s", resp.Body))
 	}
 
-	// Using built-in parsing to convert response to a native Go struct
-	parsed, err := metronome.ParseCreateCustomerResponse(resp)
-	if err != nil {
-		panic(err)
-	}
+	// Response available as a struct without explicit parsing
+	customer := resp.JSON200.Data
 
-	// Sample output:
-	// request succeeded: {ExternalId:my_customer_alias Id:7d8e8341-f271-4738-8a7f-cf7d6c2418f3 IngestAliases:[my_customer_alias] Name:my_customer_id}
-	fmt.Printf("request succeeded: %+v", parsed.JSON200.Data)
+	fmt.Printf("'id' of created customer: %s\n", customer.Id)
+	fmt.Printf("'name' of created customer: %s\n", customer.Name)
+	fmt.Printf("'aliases' for the created customer: %s\n", customer.IngestAliases)
 }
+
+// Sample output:
+// 'id' of created customer: 1eeb3160-1d1a-40dc-9571-1a65fefbc975
+// 'name' of created customer: my_customer_id
+// 'aliases' for the created customer: [my_customer_alias]
 ```
 
 ## Requesting updates
