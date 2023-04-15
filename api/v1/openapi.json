@@ -1912,95 +1912,6 @@
         }
       }
     },
-    "/customers/{customer_id}/invoices/cached": {
-      "get": {
-        "description": "List all invoices for a given customer, optionally filtered by status, date range, and/or credit type. Responses are cached for up to 5 minutes.",
-        "operationId": "listInvoicesCached",
-        "summary": "List invoices (cached)",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/CustomerId"
-          },
-          {
-            "$ref": "#/components/parameters/PageLimit"
-          },
-          {
-            "$ref": "#/components/parameters/NextPage"
-          },
-          {
-            "$ref": "#/components/parameters/InvoiceStatus"
-          },
-          {
-            "in": "query",
-            "name": "credit_type_id",
-            "description": "Only return invoices for the specified credit type",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "starting_on",
-            "description": "RFC 3339 timestamp (inclusive). Invoices will only be returned for billing periods that start at or after this time.",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            }
-          },
-          {
-            "in": "query",
-            "name": "ending_before",
-            "description": "RFC 3339 timestamp (exclusive). Invoices will only be returned for billing periods that end before this time.",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            }
-          }
-        ],
-        "tags": [
-          "Invoices"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "data",
-                    "next_page"
-                  ],
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Invoice"
-                      }
-                    },
-                    "next_page": {
-                      "type": "string",
-                      "nullable": true
-                    }
-                  }
-                },
-                "examples": {
-                  "response1": {
-                    "$ref": "#/components/examples/InvoiceExample"
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          }
-        }
-      }
-    },
     "/customers/{customer_id}/invoices/{invoice_id}": {
       "get": {
         "description": "Fetch a specific invoice for a given customer.",
@@ -2405,6 +2316,62 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auditLogs": {
+      "get": {
+        "description": "Retrieves a range of audit logs. If no further audit logs are currently available, the data array will be empty. As new audit logs are created, subsequent requests using the same next_page value will be in the returned data array, ensuring a continuous and uninterrupted reading of audit logs.\n",
+        "operationId": "getAuditLogs",
+        "summary": "Get audit logs",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/NextPage"
+          },
+          {
+            "name": "starting_on",
+            "in": "query",
+            "description": "RFC 3339 timestamp of the earliest audit log to return. Cannot be used with 'next_page'.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "tags": [
+          "Security"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "next_page"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/AuditLog"
+                      }
+                    },
+                    "next_page": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
                 }
               }
             }
@@ -3218,7 +3185,8 @@
         "type": "string",
         "enum": [
           "aws_marketplace",
-          "stripe"
+          "stripe",
+          "netsuite"
         ]
       },
       "EndCustomerPlanPayload": {
@@ -5248,6 +5216,22 @@
           }
         }
       },
+      "InvoiceWithCustomerPlanId": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Invoice"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "customer_plan_id": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          }
+        ]
+      },
       "ExternalInvoiceStatus": {
         "type": "string",
         "enum": [
@@ -5611,13 +5595,17 @@
       "Actor": {
         "type": "object",
         "required": [
-          "id"
+          "id",
+          "name"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
           "email": {
+            "type": "string"
+          },
+          "name": {
             "type": "string"
           }
         }
@@ -5658,6 +5646,10 @@
     {
       "name": "Custom fields",
       "description": "These endpoints allow you to update and retrieve custom field data."
+    },
+    {
+      "name": "Security",
+      "description": "These endpoints allow you to update and retrieve security data."
     }
   ],
   "security": [
