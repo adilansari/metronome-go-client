@@ -165,7 +165,7 @@
                         "name": "USD (cents)"
                       },
                       "threshold": 0,
-                      "updated_at": "2022-01-01T00:00:00Z"
+                      "updated_at": "2022-01-01T00:00:00+00:00"
                     }
                   }
                 }
@@ -242,7 +242,7 @@
                           "name": "USD (cents)"
                         },
                         "threshold": 0,
-                        "updated_at": "2022-01-01T00:00:00Z"
+                        "updated_at": "2022-01-01T00:00:00+00:00"
                       }
                     },
                     {
@@ -257,7 +257,7 @@
                           "name": "USD (cents)"
                         },
                         "threshold": 1000,
-                        "updated_at": "2022-01-01T00:00:00Z"
+                        "updated_at": "2022-01-01T00:00:00+00:00"
                       }
                     }
                   ],
@@ -394,7 +394,10 @@
                           "name": "USD (cents)"
                         }
                       }
-                    ]
+                    ],
+                    "custom_fields": {
+                      "x_account_id": "KyVnHhSBWl7eY2bl"
+                    }
                   }
                 }
               }
@@ -500,8 +503,8 @@
                 },
                 "name": "Acme Corp Promotional Credit Grant",
                 "reason": "Incentivize new customer",
-                "effective_at": "2022-02-01T00:00:00Z",
-                "expires_at": "2022-04-01T00:00:00Z",
+                "effective_at": "2022-02-01T00:00:00+00:00",
+                "expires_at": "2022-04-01T00:00:00+00:00",
                 "paid_amount": {
                   "amount": 5000,
                   "credit_type_id": "2714e483-4ff1-48e4-9e25-ac732e8f24f2"
@@ -618,8 +621,8 @@
                   "d7abd0cd-4ae9-4db7-8676-e986a4ebd8dc",
                   "0e5b8609-d901-4992-b394-c3c2e3f37b1c"
                 ],
-                "not_expiring_before": "2022-02-01T00:00:00Z",
-                "effective_before": "2022-02-01T00:00:00Z"
+                "not_expiring_before": "2022-02-01T00:00:00+00:00",
+                "effective_before": "2022-02-01T00:00:00+00:00"
               }
             }
           }
@@ -826,10 +829,13 @@
                       "id": "7aa11640-0703-4600-8eb9-293f535a6b74",
                       "plan_id": "94293d66-aa05-4a8e-881a-c90872047b67",
                       "plan_name": "Standard",
-                      "starting_on": "2021-01-01T00:00:00Z",
+                      "starting_on": "2021-01-01T00:00:00+00:00",
                       "trial_info": {
-                        "ending_before": "2021-01-15T00:00:00Z",
+                        "ending_before": "2021-01-15T00:00:00+00:00",
                         "spending_caps": []
+                      },
+                      "custom_fields": {
+                        "x_account_id": "KyVnHhSBWl7eY2bl"
                       }
                     }
                   ],
@@ -860,8 +866,8 @@
               },
               "example": {
                 "plan_id": "d2c06dae-9549-4d7d-bc04-b78dd3d241b8",
-                "starting_on": "2021-02-01T00:00:00Z",
-                "ending_before": "2022-02-01T00:00:00Z"
+                "starting_on": "2021-02-01T00:00:00+00:00",
+                "ending_before": "2022-02-01T00:00:00+00:00"
               }
             }
           }
@@ -1005,7 +1011,7 @@
                 "$ref": "#/components/schemas/EndCustomerPlanPayload"
               },
               "example": {
-                "ending_before": "2021-02-01T00:00:00Z"
+                "ending_before": "2021-02-01T00:00:00+00:00"
               }
             }
           }
@@ -1046,10 +1052,10 @@
               },
               "example": [
                 {
-                  "transaction_id": "2021-01-01T00:00:00Z_cluster42",
+                  "transaction_id": "2021-01-01T00:00:00+00:00_cluster42",
                   "customer_id": "team@example.com",
                   "event_type": "heartbeat",
-                  "timestamp": "2021-01-01T00:00:00Z",
+                  "timestamp": "2021-01-01T00:00:00+00:00",
                   "properties": {
                     "cluster_id": "42",
                     "cpu_seconds": 60,
@@ -1085,8 +1091,8 @@
               "example": {
                 "customer_id": "04ca7e72-4229-4a6e-ab11-9f7376fccbcb",
                 "billable_metric_id": "222796fd-d29c-429e-89b2-549fabda4ed6",
-                "starting_on": "2021-01-01T00:00:00Z",
-                "ending_before": "2021-01-03T00:00:00Z",
+                "starting_on": "2021-01-01T00:00:00+00:00",
+                "ending_before": "2021-01-03T00:00:00+00:00",
                 "window_size": "day",
                 "group_by": {
                   "key": "region",
@@ -1171,8 +1177,8 @@
               },
               "example": {
                 "window_size": "day",
-                "starting_on": "2021-01-01T00:00:00Z",
-                "ending_before": "2021-01-03T00:00:00Z"
+                "starting_on": "2021-01-01T00:00:00+00:00",
+                "ending_before": "2021-01-03T00:00:00+00:00"
               }
             }
           }
@@ -1740,8 +1746,8 @@
                 "$ref": "#/components/schemas/CreditLedgerEntriesQueryPayload"
               },
               "example": {
-                "starting_on": "2021-01-01T00:00:00Z",
-                "ending_before": "2021-02-01T00:00:00Z",
+                "starting_on": "2021-01-01T00:00:00+00:00",
+                "ending_before": "2021-02-01T00:00:00+00:00",
                 "customer_ids": [
                   "6a37bb88-8538-48c5-b37b-a41c836328bd"
                 ],
@@ -1789,12 +1795,12 @@
                           "starting_balance": {
                             "including_pending": 400,
                             "excluding_pending": 400,
-                            "effective_at": "2021-01-01T00:00:00Z"
+                            "effective_at": "2021-01-01T00:00:00+00:00"
                           },
                           "ending_balance": {
                             "including_pending": 110,
                             "excluding_pending": 400,
-                            "effective_at": "2021-02-01T00:00:00Z"
+                            "effective_at": "2021-02-01T00:00:00+00:00"
                           },
                           "entries": [],
                           "pending_entries": [
@@ -1802,7 +1808,7 @@
                               "amount": 290,
                               "reason": "Automated invoice deduction",
                               "running_balance": 110,
-                              "effective_at": "2021-02-01T00:00:00Z",
+                              "effective_at": "2021-02-01T00:00:00+00:00",
                               "created_by": "Metronome System",
                               "credit_grant_id": "f06b3d1b-c724-4e0b-99d1-20c0526bf21b",
                               "invoice_id": "92fb6de8-eb2f-47e5-ae1b-b1e0fb1f388d"
@@ -1948,8 +1954,8 @@
                   "data": {
                     "id": "6a37bb88-8538-48c5-b37b-a41c836328bd",
                     "customer_id": "617e39d8-68f4-4592-b8d2-c2bf26a76989",
-                    "start_timestamp": "2021-01-01T00:00:00Z",
-                    "end_timestamp": "2021-02-01T00:00:00Z",
+                    "start_timestamp": "2021-01-01T00:00:00+00:00",
+                    "end_timestamp": "2021-02-01T00:00:00+00:00",
                     "credit_type": {
                       "id": "2714e483-4ff1-48e4-9e25-ac732e8f24f2",
                       "name": "USD (cents)"
@@ -2798,8 +2804,8 @@
             {
               "id": "6a37bb88-8538-48c5-b37b-a41c836328bd",
               "customer_id": "617e39d8-68f4-4592-b8d2-c2bf26a76989",
-              "start_timestamp": "2021-01-01T00:00:00Z",
-              "end_timestamp": "2021-02-01T00:00:00Z",
+              "start_timestamp": "2021-01-01T00:00:00+00:00",
+              "end_timestamp": "2021-02-01T00:00:00+00:00",
               "credit_type": {
                 "id": "2714e483-4ff1-48e4-9e25-ac732e8f24f2",
                 "name": "USD (cents)"
@@ -3935,13 +3941,13 @@
             "description": "Only return credit grants that expire at or after this timestamp.",
             "type": "string",
             "format": "date-time",
-            "example": "2022-02-01T00:00:00Z"
+            "example": "2022-02-01T00:00:00+00:00"
           },
           "effective_before": {
             "description": "Only return credit grants that are effective before this timestamp (exclusive).",
             "type": "string",
             "format": "date-time",
-            "example": "2022-02-01T00:00:00Z"
+            "example": "2022-02-01T00:00:00+00:00"
           }
         }
       },
@@ -3990,6 +3996,18 @@
           "properties": {
             "type": "object",
             "additionalProperties": true
+          }
+        }
+      },
+      "SignedEvent": {
+        "required": [
+          "jws_data"
+        ],
+        "type": "object",
+        "properties": {
+          "jws_data": {
+            "type": "string",
+            "minLength": 1
           }
         }
       },
@@ -4196,7 +4214,8 @@
           "id",
           "plan_id",
           "plan_name",
-          "starting_on"
+          "starting_on",
+          "custom_fields"
         ],
         "type": "object",
         "properties": {
@@ -4258,6 +4277,9 @@
                 }
               }
             }
+          },
+          "custom_fields": {
+            "$ref": "#/components/schemas/CustomField"
           }
         }
       },
@@ -4461,7 +4483,8 @@
       "PlanDetail": {
         "required": [
           "id",
-          "name"
+          "name",
+          "custom_fields"
         ],
         "type": "object",
         "properties": {
@@ -4552,6 +4575,9 @@
                 }
               }
             }
+          },
+          "custom_fields": {
+            "$ref": "#/components/schemas/CustomField"
           }
         }
       },
@@ -5513,6 +5539,8 @@
           "charge",
           "credit_grant",
           "customer",
+          "customer_plan",
+          "plan",
           "product"
         ]
       },
@@ -5520,7 +5548,8 @@
         "type": "string",
         "enum": [
           "chargebee",
-          "netsuite"
+          "netsuite",
+          "stripe"
         ]
       },
       "CustomField": {
@@ -5650,6 +5679,10 @@
     {
       "name": "Security",
       "description": "These endpoints allow you to update and retrieve security data."
+    },
+    {
+      "name": "Settings",
+      "description": "Settings that affect the behavior of Metronome"
     }
   ],
   "security": [
